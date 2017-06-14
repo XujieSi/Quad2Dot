@@ -101,7 +101,9 @@ public class PrintQuads
         sb.append(lineSep);
         Iterator<Quad> qi = bb.iterator();
         while (qi.hasNext()) {
-            sb.append(qi.next().toString());
+            // sb.append(qi.next().toVerboseStr());
+	    Quad qd = qi.next();
+	    sb.append( qd.toString() + " => " + qd.toJavaLocStr() );
             sb.append(lineSep);
         }
         sb.append(lineSep);
