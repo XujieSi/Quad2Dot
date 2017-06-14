@@ -1,0 +1,41 @@
+<!-- Borrowed and modified from https://ant.apache.org/manual/tutorial-HelloWorldWithAnt.html -->
+<project default="jar">
+
+  <property name="debuglevel" value="source,lines,vars"/>
+  <property name="target" value="1.6"/>
+  <property name="source" value="1.6"/>
+
+  <target name="compile">
+    <mkdir dir="build/classes"/>
+    <javac srcdir="src"
+	   classpath="libs/joeq.jar:libs/jwutil.jar"
+	   destdir="build/classes"
+	   target="${target}"
+	   source="${source}"
+	   debug="true"
+	   debuglevel="lines,source,vars"/>
+  </target>
+
+  <target name="run"> 
+    <java classname="PrintQuads"  fork="true" > 
+      <classpath>
+      	<pathelement path="test" />
+      	<pathelement path="build/p.jar" />
+      	<pathelement path="libs/joeq.jar" />
+      	<pathelement path="libs/jwutil.jar" />
+      </classpath>
+
+      <arg value="PrintQuads" />
+      <arg value="elevator.Elevator" />
+      <arg value="elevator.Floor" />
+      <arg value="elevator.Lift" />
+      <arg value="elevator.Controls" />
+      <arg value="elevator.ButtonPress" />
+    </java>
+  </target>
+
+  <target name="jar" depends="compile">
+    <jar destfile="build/p.jar" basedir="build/classes"></jar>
+  </target>
+
+</project>
